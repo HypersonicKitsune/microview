@@ -76,12 +76,20 @@ int main(int argc, char *argv[])
 		g_error_free(error);
 		return code;
 	}
-
+	
+	
 	// get widgets from builder
 	main_window = GTK_WIDGET(gtk_builder_get_object(builder, "MainWindow"));
    	image = GTK_WIDGET(gtk_builder_get_object(builder, "Image"));
    	menuopen = GTK_WIDGET(gtk_builder_get_object(builder, "Open"));
    	menuquit = GTK_WIDGET(gtk_builder_get_object(builder, "Quit"));
+    
+    // if a filename is in argument
+    if(argc > 1)
+    {
+        gchar *filename = argv[1];
+        gtk_image_set_from_file(GTK_IMAGE(image), filename);
+    }
 
 	// setting up the main window...
 	g_signal_connect(G_OBJECT(main_window), "destroy", (GCallback)gtk_main_quit, NULL);
