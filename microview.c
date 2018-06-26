@@ -4,13 +4,19 @@
 // useful macros (TODO add it in an other file ?)
 #define GUI_PATH "./glade/gui.glade"
 
+// GTK widgets
+GtkWidget  *main_window = NULL;
+GtkWidget  *image       = NULL;
+GtkWidget  *menuopen    = NULL;
+GtkWidget  *menuquit    = NULL;
+
+// GTK stuff
+GtkBuilder *builder     = NULL;
+GError     *error       = NULL;
+gchar      *gui_file    = NULL;
+
 int main(int argc, char *argv[])
-{
-	GtkWidget  *main_window = NULL;
-	GtkBuilder *builder     = NULL;
-	GError     *error       = NULL;
-	gchar      *gui_file    = NULL;
-	
+{	
 	// setting up GTK
 	gtk_init(&argc, &argv);
 	builder = gtk_builder_new();
@@ -29,6 +35,9 @@ int main(int argc, char *argv[])
 	}
 
 	main_window = GTK_WIDGET(gtk_builder_get_object(builder, "MainWindow"));
+    image = GTK_WIDGET(gtk_builder_get_object(builder, "Image"));
+    menuopen = GTK_WIDGET(gtk_builder_get_object(builder, "Open"));
+    menuquit = GTK_WIDGET(gtk_builder_get_object(builder, "Quit"));
 
 	// setting up the main window...
 
